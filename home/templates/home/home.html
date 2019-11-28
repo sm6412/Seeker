@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+    </head>
+    <body>
+        <h1>Seeker Home</h1>
+        {% for code in qr_codes %}
+            <p>Device Name: {{code.device_name}}</p>
+            <p>QR Code: {{code.qr_code}}</p>
+        {% endfor %}
+    </body>
+</html>
