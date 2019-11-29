@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title></title>
-    </head>
-    <body>
-        <h1>Seeker Home</h1>
-        {% for code in qr_codes %}
-            <p>Device Name: {{code.device_name}}</p>
-            <p>QR Code: {{code.qr_code}}</p>
-        {% endfor %}
-    </body>
-</html>
+{% extends "home/base.html" %}
+
+{% block content %}
+    <h1>Your Devices</h1>
+    <br>
+    {% for code in qr_codes %}
+        <article class="media content-section">
+            <div class="media-body">
+              <h2><a class="article-title" href="#">Device Name: {{code.device_name}}</a></h2>
+              <p class="article-content">QR Code: {{code.qr_code}}</p>
+            </div>
+          </article>
+    {% endfor %}
+{% endblock content %}

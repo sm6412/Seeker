@@ -14,6 +14,7 @@ codes = [
 
 def home(request):
     context = {
-        'qr_codes':codes
+        'qr_codes':codes,
+        'page_title' : 'Home'
     }
     return render(request,'home/home.html',context)
