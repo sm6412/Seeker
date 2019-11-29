@@ -1,20 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-codes = [
-    {
-        'device_name' : "Samira's iPhone",
-        'qr_code' : "1234"
-    },
-    {
-        'device_name' : "Samira's calculator",
-        'qr_code' : "1235"
-    }
-]
+# import models
+from .models import QR_Code
 
 def home(request):
     context = {
-        'qr_codes':codes,
+        'qr_codes': QR_Code.objects.all(),
         'page_title' : 'Home'
     }
     return render(request,'home/home.html',context)

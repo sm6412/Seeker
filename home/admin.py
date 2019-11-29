@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import QR_Code
+
+admin.site.register(QR_Code)
