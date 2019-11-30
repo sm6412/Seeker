@@ -12,9 +12,11 @@ from django.contrib.auth.models import User
 @login_required
 def home(request):
     user = request.user
+    firstname = user.username
     codes = QR_Code.objects.filter(owner=user)
     num_of_codes = len(codes)
     context = {
+        'name' : firstname,
         'code_num': num_of_codes,
         'qr_codes': codes,
         'page_title' : 'Home'
