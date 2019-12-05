@@ -11,6 +11,4 @@ urlpatterns = [
     path('qr_code/<int:pk>/delete/',CodeDeleteView.as_view(), name = 'code-delete'),
     path('found_form/<int:device_id>/', emailView, name='found'),
     path('success/', successView, name='success'),
-    
-
 ]

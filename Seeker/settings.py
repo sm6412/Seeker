@@ -125,6 +125,17 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'seeker-home'
 LOGIN_URL = 'login'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# email backend
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'SeekerLostAndFoundApp@gmail.com'
+EMAIL_HOST_PASSWORD = 'LargeScale'
+EMAIL_PORT = 587 
+EMAIL_USE_TLS = True
+
+
+
+
+
 
 

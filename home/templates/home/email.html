@@ -1,11 +1,15 @@
 {% extends "home/base.html" %}
 {% block content %}
-    <h1>Looks like you found: {{device}}</h1>
+    <h1>Looks like you found a lost item!</h1>
+    <p>
+        Please enter your first name and a valid email that the owner of this 
+        device can reach you at.
+    </p>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <div class="form-actions">
-        <button type="submit">Send</button>
+        <button class="btn btn-outline-info" type="submit">Send</button>
         </div>
     </form>
 {% endblock content %}
