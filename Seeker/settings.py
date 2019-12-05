@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'qr_code',
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
+    
 ]
 
 MIDDLEWARE = [
@@ -123,3 +125,6 @@ STATIC_URL = '/static/'
 
 LOGIN_REDIRECT_URL = 'seeker-home'
 LOGIN_URL = 'login'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+

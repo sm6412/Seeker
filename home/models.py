@@ -6,7 +6,8 @@ from django.urls import reverse
 class QR_Code(models.Model):
     owner  = models.ForeignKey(User,on_delete=models.CASCADE)
     device = models.CharField(max_length=100)
-    qr_code = models.IntegerField() 
+
+
 
     class Meta:
         unique_together = ['owner','device']
