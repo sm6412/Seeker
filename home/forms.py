@@ -21,5 +21,5 @@ class CreateDeviceCodeForm(forms.ModelForm):
     def clean_device(self):
         device = self.cleaned_data['device']
         if QR_Code.objects.filter(owner=self.owner, device=device).exists():
-            raise forms.ValidationError("You have already have a device with the same name!")
+            raise forms.ValidationError("You already have a device with the same name!")
         return device
