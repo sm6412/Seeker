@@ -3,18 +3,47 @@
 {% load define_action %}
 
 {% block content %}
+<style>
+  
+    .home{
+
+      
+      text-align: center;
+      align-items: center;
+     /*background-color: rgba(255,255,255,0.5);*/
+      background-color:white;
+      margin-bottom: 10px;
+  
+       
+    }
+    .content-section{
+      background-color: rgba(255,255,255,0.5);
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    
+  
+</style>
   {% if code_num == 0 %}
+ <div class="home">
     <h1>You have no devices</h1>
+
+   
     <br>
     <a href="{% url 'code-create' %}"><button class="btn btn-outline-info">Create New QR Code</button></a>
     <br>
+    
+  </div>
   {% else %}
+  <div class="home">
     <h1>{{name}}'s Devices</h1>
     <h3>Click device name to view QR code</h3>
     <br>
     <a href="{% url 'code-create' %}"><button class="btn btn-outline-info">Create New QR Code</button></a>
+
     <br>
     <br>
+     </div>
     {% for code in qr_codes %}
       <article class="media content-section">
         <div class="media-body">
@@ -27,6 +56,8 @@
           <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'code-delete' code.id %}">Delete</a>
         {% endif %}
       </article>
+
     {% endfor %}
   {% endif %}
+
 {% endblock content %}
