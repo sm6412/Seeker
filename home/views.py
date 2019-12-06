@@ -5,7 +5,7 @@ from django.views.generic import CreateView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from .forms import ContactForm, CreateDeviceCode
+from .forms import ContactForm, CreateDeviceCodeForm
 from django.core.mail import send_mail
 from django.conf import settings
 
@@ -42,7 +42,7 @@ class CodeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 
 class CodeCreateView(LoginRequiredMixin,CreateView):
     template_name = 'home/qr_code_form.html'
-    form_class = CreateDeviceCode
+    form_class = CreateDeviceCodeForm
 
     def form_valid(self,form):
         self.object = form.save(commit=False)

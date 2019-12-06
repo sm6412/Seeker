@@ -9,14 +9,14 @@ class ContactForm(forms.Form):
     first_name = forms.CharField(max_length=100,required=True)
     email = forms.EmailField(required=True)
 
-class CreateDeviceCode(forms.ModelForm):
+class CreateDeviceCodeForm(forms.ModelForm):
     class Meta:
         model = QR_Code
         exclude = ('owner',)
 
     def __init__(self, *args, **kwargs):
         self.owner = kwargs.pop('owner')
-        super(CreateDeviceCode, self).__init__(*args, **kwargs)
+        super(CreateDeviceCodeForm, self).__init__(*args, **kwargs)
 
     def clean_device(self):
         device = self.cleaned_data['device']
