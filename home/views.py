@@ -74,8 +74,8 @@ def emailView(request, device_id):
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
-            #owner_email = code.owner.email
-            owner_email = settings.EMAIL_HOST_USER
+            owner_email = code.owner.email
+            #owner_email = settings.EMAIL_HOST_USER
             owner_device = code.device
             owner_name = code.owner.first_name
             subject = 'Found Device: '+owner_device

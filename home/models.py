@@ -11,7 +11,7 @@ class QR_Code(models.Model):
         return self.device
 
     def get_absolute_url(self):
-        return reverse('code-detail',kwargs={'pk':self.pk})
+        return reverse('seeker-home')
     
 
 
