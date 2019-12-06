@@ -43,7 +43,7 @@
     <br>
      </div>
     {% for code in qr_codes %}
-      <div class="media content-section">
+      <article class="media content-section">
         <div class="media-body">
           <h2><a class="article-title" href="{% url 'code-detail' code.id %}">Device Name: {{code.device}}</a></h2>
           <p class="article-content">QR Code: {{code.qr_code}}</p>
@@ -51,7 +51,7 @@
         {% if code.owner == user %}
           <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'code-delete' code.id %}">Delete</a>
         {% endif %}
-      </div>
+      </article>
      
    
     {% endfor %}
