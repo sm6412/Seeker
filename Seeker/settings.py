@@ -31,6 +31,7 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'qr_code',
     'home.apps.HomeConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+    'django.contrib.staticfiles'
+    
 ]
 
 MIDDLEWARE = [
@@ -127,3 +129,17 @@ STATICFILES_DIRS = (
 
 LOGIN_REDIRECT_URL = 'seeker-home'
 LOGIN_URL = 'login'
+
+# email backend
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'SeekerLostAndFoundApp@gmail.com'
+EMAIL_HOST_PASSWORD = 'LargeScale'
+EMAIL_PORT = 587 
+EMAIL_USE_TLS = True
+
+
+
+
+
+
+

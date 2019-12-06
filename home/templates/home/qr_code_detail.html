@@ -1,10 +1,14 @@
 {% extends "home/base.html" %}
+{% load define_action %}
+{% load qr_code %}
 
 {% block content %}
     <article class="media content-section">
         <div class="media-body">
           <h2>Device Name: {{object.device}}</h2>
-          <p class="article-content">QR Code: {{object.qr_code}}</p>
+          {% url 'found' object.id as the_url %}
+          {% define the_url as final_url %}
+          <p class="article-content"><strong><code>{% qr_from_text final_url size="m" %}</code></strong></p>
         </div>
     </article>
 {% endblock content %}
