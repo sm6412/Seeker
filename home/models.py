@@ -7,11 +7,6 @@ class QR_Code(models.Model):
     owner  = models.ForeignKey(User,on_delete=models.CASCADE)
     device = models.CharField(max_length=100)
 
-
-
-    class Meta:
-        unique_together = ['owner','device']
-
     def __str__(self):
         return self.device
 

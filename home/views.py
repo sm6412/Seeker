@@ -5,10 +5,9 @@ from django.views.generic import CreateView, DetailView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from .forms import ContactForm
+from .forms import ContactForm, CreateDeviceCode
 from django.core.mail import send_mail
 from django.conf import settings
-
 
 # import models
 from .models import QR_Code
@@ -42,14 +41,24 @@ class CodeDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
         return False
 
 class CodeCreateView(LoginRequiredMixin,CreateView):
-    model = QR_Code
-    fields = ['device']
+    template_name = 'home/qr_code_form.html'
+    form_class = CreateDeviceCode
 
     def form_valid(self,form):
-        owner = self.request.user
-        form.instance.owner = owner
-        print(form.instance.id)
+        self.object = form.save(commit=False)
+        self.object.owner = self.request.user
+        self.object.save()
         return super().form_valid(form)
+
+    def get_initial(self, *args, **kwargs):
+        initial = super(CodeCreateView, self).get_initial(**kwargs)
+        initial['device'] = ''
+        return initial
+
+    def get_form_kwargs(self, *args, **kwargs):
+        kwargs = super(CodeCreateView, self).get_form_kwargs(*args, **kwargs)
+        kwargs['owner'] = self.request.user
+        return kwargs
 
 def email_body(owner_device,finder_name,owner_name,finder_email):
     message = "Hi "+owner_name+",\n\n"
@@ -57,8 +66,6 @@ def email_body(owner_device,finder_name,owner_name,finder_email):
     message += "If you'd like to contact "+finder_name+" about retrieving it, their email is "+finder_email+".\n\n"
     message += "Best,\nSeeker"
     return message
-
-
 
 def emailView(request, device_id):
     code = QR_Code.objects.get(id=device_id)
