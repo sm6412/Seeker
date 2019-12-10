@@ -3,4 +3,8 @@
 
 {% url 'found' object.id as the_url %}
 {% define the_url as final_url %}
-<p class="article-content"><strong><code>{% qr_from_text final_url size="m" %}</code></strong></p>
+{% if user.get_username == object.owner.username %}
+    <p class="article-content"><strong><code>{% qr_from_text final_url size="m" %}</code></strong></p>
+{% else %}
+    <p>You do not have access to this page</p>
+{% endif %}
