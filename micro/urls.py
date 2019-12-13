@@ -10,7 +10,7 @@ urlpatterns = [
     path('device/<int:pk>/', DeviceDetailView.as_view(), name='device-detail'),
     path('new/', DeviceCreateView.as_view(), name='device-create'),
     path('device/<int:pk>/delete/', DeviceDeleteView.as_view(), name='device-delete'),
-    path('found_form/<int:device_id>/', emailView, name='found'),
+    path('found_form/<int:user_id>/<int:device_id>/', emailView, name='found'),
     path('success/', successView, name='success'),
     path('register/', views.register, name='register'),
     path('login/', auth_views.LoginView.as_view(template_name='micro/login.html'), name='login'),

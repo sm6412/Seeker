@@ -72,14 +72,18 @@ def email_body(device_name, finder_name, owner_name, finder_email):
     return message
 
 
-def emailView(request, device_id):
-    device = Device.objects.get(id=device_id)
+def emailView(request, user_id, device_id):
+    devices = Device.objects.filter(user_id=user_id, id=device_id)
+    set_user_for_sharding(devices, user_id)
+    device = devices[0];
     if request.method == 'GET':
         form = ContactForm()
     else:
         form = ContactForm(request.POST)
         if form.is_valid():
-            owner = Profile.objects.get(user_id=device.user_id)
+            owners = Profile.objects.filter(user_id=device.user_id)
+            set_user_for_sharding(owners, device.user_id)
+            owner = owners[0]
 
             owner_email = owner.email
             owner_name = owner.first_name

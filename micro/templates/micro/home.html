@@ -48,7 +48,7 @@
       <article class="media content-section">
         <div class="media-body">
           <h2>Device Name: {{device.name}}</h2>
-          {% url 'found' device.id as the_url %}
+          {% url 'found' device.user_id device.id as the_url %}
           {% define the_url as final_url %}
           <p class="article-content"><strong><code>{% qr_from_text final_url size="m" %}</code></strong></p>
           <a style="background-color:#4BAAC7; color:white;"class="btn btn-outline-info btn-sm mt-1 mb-1" href="{% url 'device-detail' device.id %}">Print Out</a>

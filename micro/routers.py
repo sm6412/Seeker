@@ -20,7 +20,6 @@ def logical_shard_for_user(user_id):
 
 
 class UserRouter(object):
-
     auth_labels = {'auth', 'contenttypes'}
 
     def _database_of(self, user_id):
@@ -34,6 +33,7 @@ class UserRouter(object):
         db = None
         try:
             instance = hints['instance']
+            db = self._database_of(instance.user_id)
         except AttributeError:
             db = self._database_of(instance.id)
         except KeyError:
