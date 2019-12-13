@@ -3,5 +3,5 @@ register = template.Library()
 
 @register.simple_tag
 def define(val=None):
-    url = "http://35.186.174.20:8000"+val
+    url = "http://134.209.168.171:8000"+val
     return url
