@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, DeleteView
@@ -31,16 +31,32 @@ def home(request):
 class DeviceDetailView(LoginRequiredMixin, DetailView):
     model = Device
 
+    def get_object(self):
+        device_id = self.kwargs['pk']
+        devices = Device.objects.filter(user_id=self.request.user.id, id=device_id)
+        set_user_for_sharding(devices, self.request.user.id)
+        if len(devices) == 1:
+            return devices[0]
+        else:
+            raise Http404
+
 
 class DeviceDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Device
     success_url = '/'
 
+    def get_object(self):
+        device_id = self.kwargs['pk']
+        devices = Device.objects.filter(user_id=self.request.user.id, id=device_id)
+        set_user_for_sharding(devices, self.request.user.id)
+        if len(devices) == 1:
+            return devices[0]
+        else:
+            raise Http404
+
     def test_func(self):
         device = self.get_object()
-        if self.request.user.id == device.user_id:
-            return True
-        return False
+        return self.request.user.id == device.user_id
 
 
 class DeviceCreateView(LoginRequiredMixin, CreateView):
