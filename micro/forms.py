@@ -1,5 +1,6 @@
 from django import forms
 
+from utils.hints import set_user_for_sharding
 from .models import Device
 from .models import Profile
 from django.contrib.auth.models import User
@@ -29,8 +30,11 @@ class CreateDeviceForm(forms.ModelForm):
         self.user_id = kwargs.pop('user_id')
         super(CreateDeviceForm, self).__init__(*args, **kwargs)
 
-    def cleaned_name(self):
+    def clean_name(self):
         name = self.cleaned_data['name']
-        if Device.objects.filter(user_id=self.user_id, name=name).exists():
+        device = Device.objects.filter(user_id=self.user_id, name=name)
+        set_user_for_sharding(device, self.user_id)
+
+        if device.exists():
             raise forms.ValidationError("You already have a device with the same name!")
         return name
