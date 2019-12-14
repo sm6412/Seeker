@@ -1,0 +1,72 @@
+{% extends "micro/base.html" %}
+{% load qr_code %}
+{% load define_action %}
+
+{% block content %}
+<style>
+  
+    .home{
+
+      
+      text-align: center;
+      align-items: center;
+     /*background-color: rgba(255,255,255,0.5);*/
+      background-color:white;
+      margin-bottom: 10px;
+  
+       
+    }
+    .content-section{
+      background-color: rgba(255,255,255,0.5);
+      text-align: center;
+      margin-bottom: 5px;
+    }
+    #dev_name{
+      color:black;
+    }
+    #qr{
+      background-color:white; 
+      width:300px; 
+      margin: 0 auto;
+    }
+    
+  
+</style>
+  {% if num_devices == 0 %}
+ <div style="padding:5px;"class="home">
+    <h1>You have no devices</h1>
+
+   
+    <br>
+    <a href="{% url 'device-create' %}"><button class="btn btn-outline-info">Create New QR Code</button></a>
+    <br>
+    
+  </div>
+  {% else %}
+  <div class="home">
+    <h1>{{name}}'s Devices</h1>
+    <h3>Click device name to view QR code</h3>
+    <br>
+    <a href="{% url 'device-create' %}"><button class="btn btn-outline-info">Create New QR Code</button></a>
+
+    <br>
+    <br>
+     </div>
+    {% for device in devices %}
+      <article class="media content-section">
+        <div class="media-body">
+          <h2>Device Name: {{device.name}}</h2>
+          {% url 'found' device.user_id device.id as the_url %}
+          {% define the_url as final_url %}
+          <p id="qr" class="article-content"><strong><code>{% qr_from_text final_url size="m" %}</code></strong></p>
+          <a style="background-color:#4BAAC7; color:white;"class="btn btn-outline-info btn-sm mt-1 mb-1" href="{% url 'device-detail' device.id %}">Print Out</a>
+        </div>
+        {% if device.user_id == user.id %}
+          <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'device-delete' device.id %}">Delete</a>
+        {% endif %}
+      </article>
+
+    {% endfor %}
+  {% endif %}
+
+{% endblock content %}

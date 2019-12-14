@@ -1,0 +1,13 @@
+{% extends "micro/base.html" %}
+
+{% block content %}
+    <h2 style="background:white; text-align: center; color:black;">You have been logged out</h2>
+    <div class="border-top pt-3">
+        <small class="text-muted">
+        	<a style="background-color:#4D4949; color:white; margin-left:46%;"class="btn btn-outline-info btn-sm mt-1 mb-1" href="{% url 'login' %}">Log In Again</a>
+
+
+          
+        </small>
+    </div>
+{% endblock content %}
