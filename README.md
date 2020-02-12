@@ -1,4 +1,4 @@
-General Summary: Seeker is a lost and found service. Users are able to make an account on the website and print out unique QR codes to stick on their belongings. If the user ever loses a registered item and another person finds it, the finder can scan the QR code. The code produces a unique form that the finder can fill out to arrange a time/location to meet with the owner of the item and return it. 
+General Summary: Seeker is a lost and found web service. Users are able to make an account on the website and print out unique QR codes to stick on their belongings. If the user ever loses a registered item and another person finds it, the finder can scan the QR code. The code produces a unique form that the finder can fill out to arrange a time/location to meet with the owner of the item and return it. 
 
 Technical Summary: 
 - The Seeker web service is scalable, thus enabling millions of users.
